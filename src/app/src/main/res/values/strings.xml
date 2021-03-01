@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Bank Accounts</string>
+    <string name="text_enter_id">Enter your ID please</string>
+    <string name="button_validate">Continue</string>
+    <string name="button_authenticate">Authenticate</string>
+    <string name="text_empty"></string>
+    <string name="text_welcome">Welcome to the bank accounts of</string>
+    <string name="text_id_account">Id</string>
+    <string name="text_accountName">Account Name</string>
+    <string name="text_amount">Amount</string>
+    <string name="text_iban">IBAN</string>
+    <string name="text_currency">Currency</string>
+    <string name="button_createAccount">Create New Account</string>
+    <string name="button_refresh">Refresh</string>
+
+    <!-- Resources for the user authentication -->
+    <string name="unlock">Unlock</string>
+    <string name="confirm_authentication">Confirm your authentication</string>
+</resources>

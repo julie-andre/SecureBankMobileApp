@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dip">
+    <!--android:weightSum="100">-->
+
+    <TextView
+        android:id="@+id/idAccount"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:paddingLeft="2sp"
+        android:paddingRight="2sp"
+        android:text="@string/text_id_account"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/accountName"
+        android:textAlignment="center"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_accountName"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/iban"
+        android:textAlignment="center"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_iban"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/currency"
+        android:textAlignment="center"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_currency"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/amount"
+        android:textAlignment="center"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_amount"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+</LinearLayout>
