@@ -355,6 +355,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return;
                 }
 
+                if(value.length()>=1 && value.startsWith("0")){
+                    Toast.makeText(getApplicationContext(),"Unknown Id",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 try{
                     id = Integer.parseInt(value);
 
@@ -381,7 +386,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
                 catch(NumberFormatException nfe){
-                    // Si la conversion n'a pas été possible car le texte saisi n'est pas un entier (id) ou n'est pas contenu dans la liste des id
                     // resetting the textView
                     textId.setText("");
                     Toast.makeText(getApplicationContext(), "OhOh, Something went wrong", Toast.LENGTH_LONG).show();

@@ -47,7 +47,6 @@ public class AccountsActivity extends AppCompatActivity implements View.OnClickL
     private TextView textOwner;
     private ListView listAccounts;
     private Button buttonRefresh;
-    //private Button buttonCreate;
 
     // Code variables
     int id;
@@ -65,11 +64,9 @@ public class AccountsActivity extends AppCompatActivity implements View.OnClickL
         textOwner = findViewById(R.id.textViewOwner);
         listAccounts = findViewById(R.id.listViewAccounts);
         buttonRefresh= findViewById(R.id.btnRefresh);
-        //buttonCreate = findViewById(R.id.btnCreate);
 
-        // We link the listener to the buttons
+        // We link the listener to the button
         buttonRefresh.setOnClickListener(this);
-        //buttonCreate.setOnClickListener(this);
 
         // We call the method which role is to fetch the parameters
         fetchParameters();
@@ -174,7 +171,7 @@ public class AccountsActivity extends AppCompatActivity implements View.OnClickL
     {
         AccountsListAdapter adapter = new AccountsListAdapter(this,R.layout.adapter_view_accounts, accounts);
         listAccounts.setAdapter(adapter);
-        // Call writefile to store the changes?
+
     }
 
     private void writeFile() {
@@ -295,11 +292,6 @@ public class AccountsActivity extends AppCompatActivity implements View.OnClickL
         return success;
     }
 
-    private boolean createNewAccount(){
-        boolean created = false;
-
-        return created;
-    }
 
 
     // Creating a listener for the 2 buttons of the activity
@@ -312,16 +304,13 @@ public class AccountsActivity extends AppCompatActivity implements View.OnClickL
                     sendHttpRequestForAccounts();
                     Toast.makeText(getApplicationContext(),"Accounts have been actualized",Toast.LENGTH_SHORT).show();
                 }
+                // If the internet connection is not available
+                else{
+                    Toast.makeText(getApplicationContext(),"No internet connection available",Toast.LENGTH_SHORT).show();
+                }
 
-                // Else we fetch the data from the json, or not
-                // considering the file has been updated the last time the connection was up
                 break;
 
-            /*case R.id.btnCreate:
-                // We redirect to the account creation activity
-                Toast.makeText(getApplicationContext(),"Creating a new account",Toast.LENGTH_SHORT).show();
-
-                break;*/
             default:
                 break;
         }
