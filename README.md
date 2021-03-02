@@ -10,28 +10,28 @@ To ensure that the user is the right one, he has to go through 2 security checks
 
 * First, when the app is started, a screen is displayed asking for him to
 confirm he is the rightful user of the application by providing the right
-authentication. The authentication screen depends on the user's phone settings (pin code, password or pattern). A strong password can actually be more robust than Digital print authentication.
+authentication. The authentication screen depends on the user's phone settings (pin code, password or pattern). A strong password can actually be more robust than Digital print authentication, and a lot of mobile device still do not have digital captors.
 
 If no screen lock settings were find, the app asks the user to define one and don't grant him access to the accounts while the settings have not been adapted.
 
 ![](./images/Screen_Lock_Settings.PNG)
 
->Screen Lock Settings pannel is displayed
+>Screen Lock Settings panel is displayed
 
 Here we set a password for authentication for instance:
 
 ![](./images/Set_password.PNG)
 
->Setting a password as screen lock for instance
+>Setting a password as screen lock
 
-While the user authentication has not been validated (wrong password for instance or the user clicked on the return button), the user can't have access to the accounts. The <span style="color:blue">Continue</span> button is disabled for him.
-If the user needs to authenticate again (if he clicked on the return button for instance), he can click on the <span style="color:blue">Authenticate</span> button.
+While the user authentication has not been validated (wrong password for instance or the user clicked on the return button), the user can't have access to the accounts. The **Continue** button is disabled for him.
+If the user needs to authenticate again (if he clicked on the return button for instance), he can click on the **Authenticate** button.
 
 ![](./images/Wrong_Authentication.PNG)
 
 >Wrong authentication
 
-If the user closes the authentication panel without having authenticate properly, he will have to click on the <span style="color:blue">Authenticate</span> to try to authenticate again. The <span style="color:blue">Continue</span> button is not disabled until the authentication is completed.
+If the user closes the authentication panel without being authenticated properly, he will have to click on the **Authenticate** button to try to authenticate again. The **Continue** button is not enabled until the authentication is completed.
 
 ![](./images/Authentication_failed.PNG)
 
@@ -67,14 +67,14 @@ The user can scroll down the list to see all his accounts.
 
 ### 2. How do you securely saves user's data on the phone?
 
-The data are saved on the phone into the app's **Internal Storage** making these files accessible only by out app.
+The data are saved on the phone into the app's **Internal Storage** making these files accessible only by our app.
 There are two files:
 
   - *user.txt* containing the details (ID, name, lastname) with which user
   logged with the last time while having an internet connection.
   - *accountsJson.txt* containing the information of the user's accounts
 
-These files are encrypted using AES 256-bits keys. For that, the application uses a MasterKey provided by Android's crypto dependency. This Masterkey will be stored by the Android Keystore System.
+These files are encrypted using Advanced Encryption Standard (AES) 256-bits keys. For that, the application uses subkeys managed by a **MasterKey** provided by Android's crypto dependency (Jetpack Security). This Masterkey is stored in the Android Keystore System (making it more difficult to extract from the device) whereas the subkeys are stored in the shared preferences.
 
 ![](./images/Encrypted_file.PNG)
 
@@ -83,7 +83,7 @@ are indeed encrypted
 
 ### 3. How did you hide the API url?
 
-The exchanges with the API are secured over a TLS connection provided by the OkHttp library. SO, the API URL is hidden during network connection.
+The exchanges with the API are secured over a TLS connection provided by the OkHttp library. So, the API URL is hidden during network connection.
 
 ![](./images/Http_connection.PNG)
 
@@ -105,16 +105,16 @@ To make it harder to retrieve sensible data from the apk file decompilation, we 
 Enigma has these benefits:
 
 - Code parsing and encryption of all String values for each Java file
-- Injection of fake secret keys, the real secret keys will be stored amoung the fake ones and it will much more harder for someone to find them
+- Injection of fake secret keys, the real secret keys will be stored amoung the fake ones and it will be much more harder for someone to find them
 
 
 ### 4. More Screenshots of the application
 
 ![](./images/Set_pattern.PNG)
 
-> If no lock settings has been configured previously, the app makes the suer define one. Here the user choses a Pattern.
+> If no lock settings has been configured previously, the app makes the user define one. Here the user choses a Pattern.
 
-![](./images/Pattern_Authentication.PNG)
+![](./images/Pattern_authentication.PNG)
 
 > Authentication with a pattern when the app is started
 
@@ -126,9 +126,12 @@ Enigma has these benefits:
 
 > Accounts viewer, if the user wants to go back to the Login page he can simply click on the return button of his mobile.
 
-If the user closes the app, he will be reconnected and asked to authenticate again, each time the app is started.
+If the user closes the app, he will be disconnected and asked to authenticate again. Each time the it is started, the application requires an authentication.
 
 ![](./images/Refreshing_accounts.PNG)
 
 > Refreshing the accounts if the internet connection is up
 
+![](./images/Refreshing_accounts_offline.PNG)
+
+> Trying to refresh the accounts if the internet connection is unavailable. A toast message is displayed saying the refresh is not possible since no connection is available.
