@@ -14,6 +14,8 @@ authentication. The authentication screen depends on the user's phone settings (
 
 If no screen lock settings were find, the app asks the user to define one and don't grant him access to the accounts while the settings have not been adapted.
 
+Note: I could have added a timer to avoid brute force attempts of authentication but if the user has defined a strong pattern or password, the security should not be compromised.
+
 ![](./images/Screen_Lock_Settings.PNG)
 
 >Screen Lock Settings panel is displayed
@@ -74,7 +76,7 @@ There are two files:
   logged with the last time while having an internet connection.
   - *accountsJson.txt* containing the information of the user's accounts
 
-These files are encrypted using Advanced Encryption Standard (AES) 256-bits keys. For that, the application uses subkeys managed by a **MasterKey** provided by Android's crypto dependency (Jetpack Security). This Masterkey is stored in the Android Keystore System (making it more difficult to extract from the device) whereas the subkeys are stored in the shared preferences.
+These files are encrypted using Advanced Encryption Standard (AES) 256-bits keys. For that, the application uses subkeys managed by a **MasterKey** provided by Android's crypto dependency (Jetpack Security). This Masterkey is stored in the Android Keystore System (making it more difficult to extract from the device) whereas the subkeys are encrypted and stored in the shared preferences.
 
 ![](./images/Encrypted_file.PNG)
 
@@ -89,7 +91,7 @@ The exchanges with the API are secured over a TLS connection provided by the OkH
 
 > If the url is not using https, the connection is refused
 
-In order to hide the API url in the apk file, we can obfuscate it. Indeed, hackers can decompile the apk file and easily find the API url if it is not encrypted. To avoid reverse engineering, this application is using **Proguard** to produce a bytecode harder to decrypt for a potential Hacker who managed to decompile the apk file.
+In order to hide the API url in the apk file, we can obfuscate it. Indeed, hackers can decompile the apk file and easily find the API url if it is not encrypted. To avoid reverse engineering, this application is using **Proguard** to produce a bytecode harder to decrypt for a potential Hacker who managed to decompile the apk file. It will also obfuscate the variable and function names, making the code harder to understand if it is decompiled.
 
 Proguard has several benefits:
 

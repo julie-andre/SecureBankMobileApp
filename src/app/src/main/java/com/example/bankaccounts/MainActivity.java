@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int id;
     private String name;
     private String lastname;
+    private ConnectionManager connectionManager;
 
 
 
@@ -77,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name="";
         lastname="";
 
+        // We get an instance of connectionManager
+        connectionManager = new ConnectionManager(this);
+
         // Calling the authentication
         authenticateUser();
 
@@ -92,11 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lastname="";
     }
 
-    private boolean CheckConnection(){
-        ConnectivityManager connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetInfo = connManager.getActiveNetworkInfo();
-        return activeNetInfo!=null && activeNetInfo.isConnectedOrConnecting();
-    }
     
     private void authenticateUser(){
         // We need an instance of keyguardManager
@@ -248,10 +247,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    /**
+     * We write the JSON object into an encrypted txt file using AES256 encryption
+     */
     private void writeUserFileBis(JSONObject object){
         Context context = getApplicationContext();
         MasterKey mainKey = null;
         try {
+            // Retrieving the masterkey
             mainKey = new MasterKey.Builder(context)
                     .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                     .build();
@@ -264,6 +267,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 f.delete();
             }
 
+            // We encrypt the content to be stored in the file
             EncryptedFile encryptedFile = new EncryptedFile.Builder(context,
                     f,
                     mainKey,
@@ -284,7 +288,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * We decrypt the file and then read it to retrieve the wanted data.
+     * If the reading was successful, we return true, else we return false
+     */
     private boolean readUserFileBis(){
         boolean success = false;
         Context context = getApplicationContext();
@@ -363,7 +371,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 try{
                     id = Integer.parseInt(value);
 
-                    if(CheckConnection()){
+                    if(connectionManager.CheckConnection()){
                         // We make a call to the api to fetch the user information if they exists
                         sendHttpRequest();
                     }

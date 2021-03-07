@@ -12,6 +12,7 @@
     <string name="text_currency">Currency</string>
     <string name="button_createAccount">Create New Account</string>
     <string name="button_refresh">Refresh</string>
+    <string name="text_param">Id | Account Name | IBAN | Currency | Amount</string>
 
     <!-- Resources for the user authentication -->
     <string name="unlock">Unlock</string>

@@ -294,7 +294,7 @@ public class AccountsActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-    // Creating a listener for the 2 buttons of the activity
+    // Creating a listener for the button of the activity
     @Override
     public void onClick(View v) {
         switch(v.getId()){
